@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProjetoSD.Mobile.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style x:Key="backgroundConfig" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#F6F6F6"></Setter>
+                <Setter Property="Title" Value="WikiSick"></Setter>
+            </Style>
+            <Style x:Key="titleConfig" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold"></Setter>
+                <Setter Property="FontSize" Value="28"></Setter>
+                <Setter Property="HorizontalOptions" Value="Center"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="Margin" Value="0,0,0,5"></Setter>
+            </Style>
+            <Style x:Key="buttonConfig" TargetType="Button">
+                <Setter Property="BorderRadius" Value="10"></Setter>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="BackgroundColor" Value="Red"></Setter>                
+            </Style>
+            <Style x:Key="buttonConfig2" TargetType="Button">
+                <Setter Property="BorderRadius" Value="10"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="BackgroundColor" Value="White"></Setter>
+            </Style>
+            <Style x:Key="buttonMenuConfig" TargetType="Button">
+                <Setter Property="Margin" Value="-5,-6,-5,-6"></Setter>
+                <Setter Property="HeightRequest" Value="70"></Setter>
+                <Setter Property="BackgroundColor" Value="#F6F6F6"></Setter>
+            </Style>
+            <Style x:Key="emailEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="60"></Setter>
+                <Setter Property="Keyboard" Value="Email"></Setter>
+                <Setter Property="Placeholder" Value="Email"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="senhaEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="25"></Setter>
+                <Setter Property="Keyboard" Value="Text"></Setter>
+                <Setter Property="Placeholder" Value="Senha"></Setter>
+                <Setter Property="IsPassword" Value="True"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="crmEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="10"></Setter>
+                <Setter Property="Keyboard" Value="Numeric"></Setter>
+                <Setter Property="Placeholder" Value="CRM"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="nomeEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="90"></Setter>
+                <Setter Property="Keyboard" Value="Text"></Setter>
+                <Setter Property="Placeholder" Value="Nome"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="ufPicker" TargetType="Picker">
+                <Setter Property="Title" Value="UF"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>                  
+            </Style>
+            <Style x:Key="profissaoEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="90"></Setter>
+                <Setter Property="Keyboard" Value="Text"></Setter>
+                <Setter Property="Placeholder" Value="Profissão"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="boxViewConfig" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"></Setter>
+                <Setter Property="HeightRequest" Value="2"></Setter>
+            </Style>
+            <Style x:Key="imageConfig" TargetType="Image">
+                <Setter Property="Source" Value="saude.png"></Setter>
+                <Setter Property="Margin" Value="0,5,0,10"></Setter>
+                <Setter Property="HeightRequest" Value="150"></Setter>
+            </Style>
+            <Style x:Key="editorConfig" TargetType="Editor">
+                <Setter Property="TextColor" Value="Black"></Setter>
+                <Setter Property="Keyboard" Value="Text"></Setter>
+                <Setter Property="AutoSize" Value="TextChanges"></Setter>
+            </Style>
+            <Style x:Key="labelEditorConfig" TargetType="Label">
+                <Setter Property="FontSize" Value="18"></Setter>
+                <Setter Property="TextColor" Value="Black"></Setter>
+            </Style>
+            <Style x:Key="oQueEEntry" TargetType="Entry">
+                <Setter Property="MaxLength" Value="30"></Setter>
+                <Setter Property="Keyboard" Value="Text"></Setter>
+                <Setter Property="Placeholder" Value="O que é?"></Setter>
+                <Setter Property="PlaceholderColor" Value="Black"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

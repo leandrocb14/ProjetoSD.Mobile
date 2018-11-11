@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource backgroundConfig}"
+             x:Class="ProjetoSD.Mobile.View.CadastrarUsuarioMedicoView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Style="{StaticResource imageConfig}"></Image>
+            <Label Text="Cadastro" Style="{StaticResource titleConfig}"></Label>
+            <StackLayout Margin="20,0,20,0" VerticalOptions="Center">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout Orientation="Horizontal">
+                            <Entry Style="{StaticResource crmEntry}" HorizontalOptions="FillAndExpand"></Entry>
+                            <Button Text="Pesquisar" HorizontalOptions="End" Style="{StaticResource buttonConfig}"></Button>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Style="{StaticResource nomeEntry}"></Entry>
+                            <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}"></Picker>
+                            <Entry Style="{StaticResource profissaoEntry}"></Entry>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Style="{StaticResource emailEntry}"></Entry>
+                            <Entry Style="{StaticResource senhaEntry}"></Entry>
+                            <Entry Placeholder="Confirmar Senha" Style="{StaticResource senhaEntry}"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5,0,5">
+                <Button Text="Voltar" Style="{StaticResource buttonConfig2}" Margin="0,0,5,0" WidthRequest="150" Command="{Binding VoltarLoginCommand}"></Button>
+                <Button Text="Cadastrar" Style="{StaticResource buttonConfig}" WidthRequest="150" Command=""></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

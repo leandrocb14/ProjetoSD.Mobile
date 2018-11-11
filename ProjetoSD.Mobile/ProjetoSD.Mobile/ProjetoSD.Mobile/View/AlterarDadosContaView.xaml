@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource backgroundConfig}"
+             x:Class="ProjetoSD.Mobile.View.AlterarDadosContaView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Style="{StaticResource imageConfig}"></Image>
+            <Label Text="Alterar dados da conta" Style="{StaticResource titleConfig}"></Label>
+            <StackLayout Margin="20,0,20,0" VerticalOptions="Center">
+                <ScrollView>
+                    <StackLayout>
+                        <StackLayout>
+                            <Entry Style="{StaticResource crmEntry}"></Entry>
+                            <Entry Style="{StaticResource nomeEntry}"></Entry>
+                            <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}"></Picker>
+                            <Entry Style="{StaticResource profissaoEntry}"></Entry>
+                        </StackLayout>
+                        <StackLayout>
+                            <Entry Style="{StaticResource emailEntry}"></Entry>
+                            <Entry Placeholder="Nova senha" Style="{StaticResource senhaEntry}"></Entry>
+                            <Entry Placeholder="Confirmar Nova Senha" Style="{StaticResource senhaEntry}"></Entry>
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout Margin="0,5,0,5">
+                    <Button Text="Alterar" Style="{StaticResource buttonConfig}"></Button>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

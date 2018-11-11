@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource backgroundConfig}"
+             x:Class="ProjetoSD.Mobile.View.LoginView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Style="{StaticResource imageConfig}"></Image>
+            <StackLayout VerticalOptions="Center">
+                <StackLayout>
+                    <Label Text="Login" Style="{StaticResource titleConfig}"></Label>
+                    <StackLayout Margin="20,10,20,20">
+                        <Entry Style="{StaticResource emailEntry}"></Entry>
+                        <Entry Style="{StaticResource senhaEntry}"></Entry>
+                    </StackLayout>
+                </StackLayout>                
+                <StackLayout Margin="50,0,50,0" VerticalOptions="EndAndExpand">
+                    <StackLayout>
+                        <Button Text="Entrar" Style="{StaticResource buttonConfig}" Command="{Binding EntrarCommand}"></Button>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Margin="0,20,0,0" HorizontalOptions="Center">
+                        <Label Text="Não tem conta? " FontSize="16"></Label>
+                        <Label Text="Registre-se" TextColor="Red" FontSize="16" FontAttributes="Bold">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding CadastrarContaCommand}"></TapGestureRecognizer>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

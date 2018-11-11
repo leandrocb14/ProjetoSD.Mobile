@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource backgroundConfig}"             
+             x:Class="ProjetoSD.Mobile.View.MasterView">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center">
+                <Image Style="{StaticResource imageConfig}"></Image>
+                <Label Text="Menu" Style="{StaticResource titleConfig}"></Label>
+            </StackLayout>
+            <BoxView Style="{StaticResource boxViewConfig}"></BoxView>
+            <StackLayout>
+                <StackLayout>
+                    <Button Text="Cadastrar Doença" Command="{Binding CadastrarDoencaCommand}" Style="{StaticResource buttonMenuConfig}"></Button>
+                    <BoxView Style="{StaticResource boxViewConfig}"></BoxView>
+                    <Button Text="Alterar Dados da Conta" Command="{Binding AlterarDadosContaCommand}" Style="{StaticResource buttonMenuConfig}"></Button>
+                    <BoxView Style="{StaticResource boxViewConfig}"></BoxView>
+                    <Button Text="Sobre" Command="{Binding SobreCommand}" Style="{StaticResource buttonMenuConfig}"></Button>
+                    <BoxView Style="{StaticResource boxViewConfig}"></BoxView>
+                    <Button Text="Sair" Command="{Binding SairCommand}" Style="{StaticResource buttonMenuConfig}"></Button>
+                    <BoxView Style="{StaticResource boxViewConfig}"></BoxView>
+                </StackLayout>                
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

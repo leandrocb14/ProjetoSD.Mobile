@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Style="{StaticResource backgroundConfig}"
+             x:Class="ProjetoSD.Mobile.View.SobreView">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Style="{StaticResource imageConfig}"></Image>
+            <Label Text="Sobre" Style="{StaticResource titleConfig}"></Label>
+            <StackLayout>
+                <Label FontSize="16" HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Versão: "></Span>
+                            <Span Text="{Binding NumeroVersao}"></Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
