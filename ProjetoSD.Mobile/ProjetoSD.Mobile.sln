@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoSD.Mobile.Android", "ProjetoSD.Mobile\ProjetoSD.Mobile.Android\ProjetoSD.Mobile.Android.csproj", "{4B39346F-BBE3-467B-8D05-7CD1E678598C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetoSD.Mobile", "ProjetoSD.Mobile\ProjetoSD.Mobile\ProjetoSD.Mobile.csproj", "{5C6898AE-31A7-49DF-89A1-A1CCA0774B8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProjetoSD.Mobile", "ProjetoSD.Mobile\ProjetoSD.Mobile\ProjetoSD.Mobile.csproj", "{5C6898AE-31A7-49DF-89A1-A1CCA0774B8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,9 +35,11 @@ Global
 	GlobalSection(AutomaticVersions) = postSolution
 		UpdateAssemblyVersion.Release|Any CPU = True
 		UpdateAssemblyFileVersion.Release|Any CPU = True
-		UpdateAssemblyInfoVersion.Release|Any CPU = False
+		UpdateAssemblyInfoVersion.Release|Any CPU = True
+		ShouldCreateLogs.Release|Any CPU = True
 		AssemblyVersionSettings.Release|Any CPU = None.None.None.Increment
 		AssemblyFileVersionSettings.Release|Any CPU = None.None.None.Increment
+		AssemblyInfoVersionSettings.Release|Any CPU = None.None.None.Increment
 		UpdatePackageVersion.Release|Any CPU = False
 		AssemblyInfoVersionType.Release|Any CPU = SettingsVersion
 		InheritWinAppVersionFrom.Release|Any CPU = None
