@@ -18,11 +18,20 @@ namespace ProjetoSD.Mobile.View
             this.BindingContext = new LoginViewModel();
             InitializeComponent();
         }
+        protected override void OnAppearing()
+        {
+            MessagingCenter.Subscribe<string>(this, "Exception", (msg) =>
+            {
+                DisplayAlert("Erro", msg, "OK");
+            });
+            base.OnAppearing();
+        }
 
         protected override void OnDisappearing()
         {
             MessagingCenter.Unsubscribe<string>(this, "EntrarCommand");
             MessagingCenter.Unsubscribe<string>(this, "CadastrarContaCommand");
+            MessagingCenter.Unsubscribe<string>(this, "Exception");
             base.OnDisappearing();
         }
     }

@@ -11,25 +11,25 @@
                 <ScrollView>
                     <StackLayout>
                         <StackLayout Orientation="Horizontal">
-                            <Entry Style="{StaticResource crmEntry}" HorizontalOptions="FillAndExpand"></Entry>
-                            <Button Text="Pesquisar" HorizontalOptions="End" Style="{StaticResource buttonConfig}"></Button>
+                            <Entry Style="{StaticResource crmEntry}" HorizontalOptions="FillAndExpand" Text="{Binding CRM}"></Entry>
+                            <Button Text="Pesquisar" HorizontalOptions="End" Style="{StaticResource buttonConfig}" Command="{Binding ConsultarUFCRM}"></Button>
                         </StackLayout>
                         <StackLayout>
-                            <Entry Style="{StaticResource nomeEntry}"></Entry>
-                            <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}"></Picker>
-                            <Entry Style="{StaticResource profissaoEntry}"></Entry>
+                            <Entry Style="{StaticResource nomeEntry}" Text="{Binding Nome}"></Entry>
+                            <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}" SelectedIndex="{Binding IndexUF}"></Picker>
+                            <Entry Style="{StaticResource profissaoEntry}" Text="{Binding Profissao}"></Entry>
                         </StackLayout>
                         <StackLayout>
-                            <Entry Style="{StaticResource emailEntry}"></Entry>
-                            <Entry Style="{StaticResource senhaEntry}"></Entry>
-                            <Entry Placeholder="Confirmar Senha" Style="{StaticResource senhaEntry}"></Entry>
+                            <Entry Style="{StaticResource emailEntry}" Text="{Binding Email}"></Entry>
+                            <Entry Style="{StaticResource senhaEntry}" Text="{Binding Senha}"></Entry>
+                            <Entry Placeholder="Confirmar Senha" Style="{StaticResource senhaEntry}" Text="{Binding ConfirmarSenha}"></Entry>
                         </StackLayout>
                     </StackLayout>
                 </ScrollView>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,5,0,5">
                 <Button Text="Voltar" Style="{StaticResource buttonConfig2}" Margin="0,0,5,0" WidthRequest="150" Command="{Binding VoltarLoginCommand}"></Button>
-                <Button Text="Cadastrar" Style="{StaticResource buttonConfig}" WidthRequest="150" Command=""></Button>
+                <Button Text="Cadastrar" Style="{StaticResource buttonConfig}" WidthRequest="150" Command="{Binding EfetuarCadastroContaCommand}"></Button>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

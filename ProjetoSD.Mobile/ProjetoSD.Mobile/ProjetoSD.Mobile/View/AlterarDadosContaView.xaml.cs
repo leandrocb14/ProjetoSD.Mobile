@@ -14,7 +14,7 @@ namespace ProjetoSD.Mobile.View
 	public partial class AlterarDadosContaView : ContentPage
 	{
 		public AlterarDadosContaView ()
-		{
+		{            
             this.BindingContext = new AlterarDadosContaViewModel();
 			InitializeComponent ();
 		}
