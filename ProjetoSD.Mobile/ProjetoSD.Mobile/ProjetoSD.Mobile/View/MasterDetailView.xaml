@@ -3,14 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vw="clr-namespace:ProjetoSD.Mobile.View"
              x:Class="ProjetoSD.Mobile.View.MasterDetailView">
-    <MasterDetailPage.Master>
-        <vw:MasterView></vw:MasterView>
-    </MasterDetailPage.Master>
-    <MasterDetailPage.Detail>
-        <NavigationPage>
-            <x:Arguments>
-                <vw:DetailView></vw:DetailView>
-            </x:Arguments>
-        </NavigationPage>        
-    </MasterDetailPage.Detail>
+    
 </MasterDetailPage>

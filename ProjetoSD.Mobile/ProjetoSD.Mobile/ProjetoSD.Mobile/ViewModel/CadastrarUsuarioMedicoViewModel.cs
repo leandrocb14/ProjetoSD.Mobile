@@ -1,4 +1,5 @@
 ﻿using ProjetoSD.Mobile.BLL;
+using ProjetoSD.Mobile.Exceptions;
 using ProjetoSD.Mobile.Model;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,11 @@ namespace ProjetoSD.Mobile.ViewModel
 {
     public class CadastrarUsuarioMedicoViewModel : BaseViewModel
     {
+        #region Propriedades
         private CadastrarUsuarioMedicoBLL CadastrarUsuarioMedicoBLL;        
         private UFBLL UFBLL { get; set; }
 
         private string crm;
-
         public string CRM
         {
             get { return crm; }
@@ -26,7 +27,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private string nome;
-
         public string Nome
         {
             get { return nome; }
@@ -38,7 +38,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private int indexUF;
-
         public int IndexUF
         {
             get { return indexUF; }
@@ -55,7 +54,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private string profissao;
-
         public string Profissao
         {
             get { return profissao; }
@@ -67,7 +65,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private string email;
-
         public string Email
         {
             get { return email; }
@@ -79,7 +76,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private string senha;
-
         public string Senha
         {
             get { return senha; }
@@ -91,7 +87,6 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         private string confirmarSenha;
-
         public string ConfirmarSenha
         {
             get { return confirmarSenha; }
@@ -107,16 +102,34 @@ namespace ProjetoSD.Mobile.ViewModel
         public ICommand ConsultarUFCRM { get; set; }
 
         public List<string> ListarUFs { get { return this.UFBLL.ListarUFs(); } }
+        #endregion
 
+        #region Construtores
         public CadastrarUsuarioMedicoViewModel()
         {
             this.UFBLL = new UFBLL();
             this.CadastrarUsuarioMedicoBLL = new CadastrarUsuarioMedicoBLL();
             this.ConsultarUFCRM = new Command(async () =>
             {
-                var response = await this.CadastrarUsuarioMedicoBLL.ConsultaUFCRM(UF, crm);
-                Nome = response.item[0].nome;
-                Profissao = response.item[0].profissao;
+                try
+                {
+                    var response = await this.CadastrarUsuarioMedicoBLL.ConsultaUFCRM(UF, crm);
+                    PreencheDadosRetornadosDaConsultaUFCRM(response);
+                }
+                catch (CampoNullOrEmptyException ex)
+                {
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                catch (CRMNotFoundException ex)
+                {
+                    LimparCampoCRM();
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                catch(Exception ex)
+                {
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                
             });
             this.EfetuarCadastroContaCommand = new Command(async () =>
             {
@@ -125,7 +138,19 @@ namespace ProjetoSD.Mobile.ViewModel
                     await this.CadastrarUsuarioMedicoBLL.CadastraUsuario(crm, nome, UF, profissao, email, senha, confirmarSenha);
                     MessagingCenter.Send<string>("", "EfetuarCadastroContaCommand");
                 }
-                catch (Exception ex)
+                catch (CampoNullOrEmptyException ex)
+                {
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                catch(ConfirmationPasswordDifferentException ex)
+                {
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                catch(ArgumentException ex)
+                {
+                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                }
+                catch(Exception ex)
                 {
                     MessagingCenter.Send<string>(ex.Message, "Exception");
                 }
@@ -136,5 +161,19 @@ namespace ProjetoSD.Mobile.ViewModel
                 MessagingCenter.Send<string>("", "GoToLogin");
             });
         }
+        #endregion
+
+        #region Métodos Privados
+        private void LimparCampoCRM()
+        {
+            this.CRM = "";
+        }
+        private void PreencheDadosRetornadosDaConsultaUFCRM(ConsultaCRMJson consultaCRMJson)
+        {
+            Nome = consultaCRMJson.item[0].nome;
+            Profissao = consultaCRMJson.item[0].profissao;
+        }
+        #endregion
+
     }
 }

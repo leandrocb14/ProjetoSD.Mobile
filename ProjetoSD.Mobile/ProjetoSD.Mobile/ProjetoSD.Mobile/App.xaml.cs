@@ -19,7 +19,7 @@ namespace ProjetoSD.Mobile
             //Handle when your app starts
             MessagingCenter.Subscribe<string>(this, "EntrarCommand", (msg) =>
             {
-                MainPage = new MasterDetailView();
+                MainPage = new MasterDetailView(Convert.ToInt32(msg));
             });
             MessagingCenter.Subscribe<string>(this, "CadastrarContaCommand", (msg) =>
             {

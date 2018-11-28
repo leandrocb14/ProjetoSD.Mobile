@@ -10,13 +10,15 @@
             <StackLayout Margin="20,0,20,0" VerticalOptions="Center">
                 <ScrollView>
                     <StackLayout>
-                        <StackLayout Orientation="Horizontal">
-                            <Entry Style="{StaticResource crmEntry}" HorizontalOptions="FillAndExpand" Text="{Binding CRM}"></Entry>
-                            <Button Text="Pesquisar" HorizontalOptions="End" Style="{StaticResource buttonConfig}" Command="{Binding ConsultarUFCRM}"></Button>
+                        <StackLayout>
+                            <Entry Style="{StaticResource crmEntry}" Text="{Binding CRM}"></Entry>
+                            <StackLayout Orientation="Horizontal">
+                                <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}" SelectedIndex="{Binding IndexUF}" HorizontalOptions="FillAndExpand"></Picker>
+                                <Button Text="Pesquisar" HorizontalOptions="End" Style="{StaticResource buttonConfig}" Command="{Binding ConsultarUFCRM}"></Button>
+                            </StackLayout>                            
                         </StackLayout>
                         <StackLayout>
-                            <Entry Style="{StaticResource nomeEntry}" Text="{Binding Nome}"></Entry>
-                            <Picker Style="{StaticResource ufPicker}" ItemsSource="{Binding ListarUFs}" SelectedIndex="{Binding IndexUF}"></Picker>
+                            <Entry Style="{StaticResource nomeEntry}" Text="{Binding Nome}" IsEnabled="False"></Entry>
                             <Entry Style="{StaticResource profissaoEntry}" Text="{Binding Profissao}"></Entry>
                         </StackLayout>
                         <StackLayout>

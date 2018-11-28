@@ -11,10 +11,13 @@ namespace ProjetoSD.Mobile.DAO
 {
     public class CadastrarUsuarioMedicoDAO
     {
+        #region Propriedades
         private static string Controller = "Usuario";
         private string Url = string.Format($"{Host.Url}/{Controller}");
+        #endregion
 
-        public async Task CadastraUsuarioAsync(string crm, string nome, UF uF, string profissao, string email, string senha)
+        #region Métodos Públicos
+        public async Task CadastraUsuario(string crm, string nome, UF uF, string profissao, string email, string senha)
         {            
             HttpClient cliente = new HttpClient();
             string action = "CadastraUsuario";
@@ -27,5 +30,6 @@ namespace ProjetoSD.Mobile.DAO
                 throw new ArgumentException(messageRequestNotFound.Message);
             }
         }
+        #endregion
     }
 }

@@ -12,8 +12,10 @@ namespace ProjetoSD.Mobile.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DetailView : ContentPage
     {
-        public DetailView()
+        private int CodeUser;
+        public DetailView(int codeUser)
         {
+            this.CodeUser = codeUser;
             InitializeComponent();
         }
         protected override void OnAppearing()
@@ -22,12 +24,13 @@ namespace ProjetoSD.Mobile.View
             MessagingCenter.Subscribe<string>(this, "CadastrarDoencaCommand", (msg) =>
             {
                 MessagingCenter.Send<string>("", "MasterDescollapse");
-                Navigation.PushAsync(new CadastrarDoencaView());
+                Navigation.PushAsync(new CadastrarDoencaView(CodeUser));
             });
             MessagingCenter.Subscribe<string>(this, "AlterarDadosContaCommand", (msg) =>
             {
                 MessagingCenter.Send<string>("", "MasterDescollapse");
-                Navigation.PushAsync(new AlterarDadosContaView());
+                Navigation.PushAsync(new AlterarDadosContaView(CodeUser));
+
             });
             MessagingCenter.Subscribe<string>(this, "SobreCommand", (msg) =>
             {

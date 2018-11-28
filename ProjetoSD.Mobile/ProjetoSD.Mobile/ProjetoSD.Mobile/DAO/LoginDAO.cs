@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProjetoSD.Mobile.Exceptions;
 using ProjetoSD.Mobile.Model;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace ProjetoSD.Mobile.DAO
         /// <exception cref="ArgumentException">Exception lançada quando não existir nenhuma combinação com os parâmetros passados (<paramref name="email"/> e <paramref name="senha"/>)</exception>
         /// <param name="email"></param>
         /// <param name="senha"></param>
-        public async Task VerificaAutenticacao(string email, string senha)
+        public async Task<int> VerificaAutenticacao(string email, string senha)
         {
             HttpClient cliente = new HttpClient();
             var action = "ValidaLogin";
@@ -29,9 +30,11 @@ namespace ProjetoSD.Mobile.DAO
             var response = await cliente.PostAsync(request, new StringContent(""));            
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                var messageRequestNotFound = JsonConvert.DeserializeObject<ExceptionJson>(await response.Content.ReadAsStringAsync());
-                throw new ArgumentException(messageRequestNotFound.Message);
+                var ErrorMessageRequest = JsonConvert.DeserializeObject<ExceptionJson>(await response.Content.ReadAsStringAsync());
+                throw new UsuarioNotFoundException(ErrorMessageRequest.Message);
             }
+            var SucessMessageRequest = JsonConvert.DeserializeObject<int>(await response.Content.ReadAsStringAsync());
+            return SucessMessageRequest;
         }
     }
 }

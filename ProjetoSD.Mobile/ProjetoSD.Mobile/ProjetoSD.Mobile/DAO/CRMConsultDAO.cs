@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using ProjetoSD.Mobile.Exceptions;
 using ProjetoSD.Mobile.Model;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,12 @@ namespace ProjetoSD.Mobile.DAO
             string parameters = $"tipo=crm&uf={uF}&q={crm}&chave={KeyToConnection}&destino=json";
             string request = $"{Uri}?{parameters}";
             var response = await httpClient.GetAsync(request);
-            return JsonConvert.DeserializeObject<ConsultaCRMJson>(await response.Content.ReadAsStringAsync());            
+            var content = JsonConvert.DeserializeObject<ConsultaCRMJson>(await response.Content.ReadAsStringAsync());
+            if (Convert.ToInt32(content.total) == 0)
+            {
+                throw new CRMNotFoundException("Não foi encontrado nenhum CRM referente a essa UF!");
+            }
+            return content;            
         }
     }
 }

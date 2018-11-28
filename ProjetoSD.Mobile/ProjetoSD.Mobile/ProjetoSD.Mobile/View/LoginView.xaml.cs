@@ -22,7 +22,7 @@ namespace ProjetoSD.Mobile.View
         {
             MessagingCenter.Subscribe<string>(this, "Exception", (msg) =>
             {
-                DisplayAlert("Erro", msg, "OK");
+                DisplayAlert("Erro", msg, "OK");                
             });
             base.OnAppearing();
         }
