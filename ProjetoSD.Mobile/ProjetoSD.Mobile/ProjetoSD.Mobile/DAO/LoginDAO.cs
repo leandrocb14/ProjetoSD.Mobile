@@ -10,11 +10,14 @@ using System.Threading.Tasks;
 
 namespace ProjetoSD.Mobile.DAO
 {
-    public class LoginDAO
+    public class LoginDAO : INavigationFeature
     {
-        private static string Controller = "Usuario";
-        private string Uri = string.Format($"{Host.Url}/{Controller}");
+        #region Propriedades
+        public string Controller { get { return "Usuario"; } }
+        public string Url { get { return string.Format($"{Host.Url}/{Controller}"); } }
+        #endregion
 
+        #region Métodos Publicos
         /// <summary>
         /// Utilizado para verificar a existência da combinação entre o email e a senha dentro da base de dados.
         /// </summary>
@@ -26,7 +29,7 @@ namespace ProjetoSD.Mobile.DAO
             HttpClient cliente = new HttpClient();
             var action = "ValidaLogin";
             var parameters = $"email={email}&senha={senha}";
-            var request = string.Format($"{Uri}/{action}?{parameters}");                        
+            var request = string.Format($"{Url}/{action}?{parameters}");                        
             var response = await cliente.PostAsync(request, new StringContent(""));            
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
@@ -36,5 +39,6 @@ namespace ProjetoSD.Mobile.DAO
             var SucessMessageRequest = JsonConvert.DeserializeObject<int>(await response.Content.ReadAsStringAsync());
             return SucessMessageRequest;
         }
+        #endregion
     }
 }

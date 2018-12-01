@@ -21,6 +21,10 @@ namespace ProjetoSD.Mobile.BLL
             }
         }
 
+        /// <summary>
+        /// Método utilizado para verificar se o email está realmente dentro do padrão de um email.
+        /// </summary>
+        /// <param name="email">Parâmetro utilizado para representar o email do usuário.</param>
         public void VerificaSeEhEmail(string email)
         {
             if (!(email.Contains("@") && email.Contains(".com")))
@@ -29,6 +33,11 @@ namespace ProjetoSD.Mobile.BLL
             }
         }
 
+        /// <summary>
+        /// Método utilizado para realizar a confirmação da senha.
+        /// </summary>
+        /// <param name="senha">Representa a senha digitada.</param>
+        /// <param name="confirmacaoSenha">Representa a confirmação da senha baseado no <paramref name="senha"/>.</param>
         public void VerificaConfirmacaoDaSenha(string senha, string confirmacaoSenha)
         {
             if (senha != confirmacaoSenha)

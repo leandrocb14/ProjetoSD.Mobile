@@ -9,11 +9,19 @@ using System.Threading.Tasks;
 
 namespace ProjetoSD.Mobile.DAO
 {
-    public class AlterarDadosContaDAO
+    public class AlterarDadosContaDAO : INavigationFeature
     {
-        private static string Controller = "Usuario";
-        private string Url = string.Format($"{Host.Url}/{Controller}");
+        #region Propriedades
+        public string Controller { get { return "Usuario"; }  }
+        public string Url { get { return string.Format($"{Host.Url}/{Controller}"); } }
+        #endregion
 
+        #region Métodos Publicos
+        /// <summary>
+        /// Método utilizado para buscar informações do usuário.
+        /// </summary>
+        /// <param name="idMedico">Código de busca.</param>
+        /// <returns></returns>
         public async Task<MedicoJson> BuscaInformacoesUsuario(int idMedico)
         {
             HttpClient httpClient = new HttpClient();
@@ -24,7 +32,12 @@ namespace ProjetoSD.Mobile.DAO
             var messageRequest = JsonConvert.DeserializeObject<MedicoJson>(await response.Content.ReadAsStringAsync());
             return messageRequest;
         }
-
+        /// <summary>
+        /// Método utilizado para atualizar dados do usuário.
+        /// </summary>
+        /// <param name="idMedico">Representa o código do usuário.</param>
+        /// <param name="novaProfissao">Representa a nova profissao do usuário.</param>
+        /// <returns></returns>
         public async Task AtualizaProfissao(int idMedico, string novaProfissao)
         {
             HttpClient httpClient = new HttpClient();
@@ -32,13 +45,19 @@ namespace ProjetoSD.Mobile.DAO
             string parameters = $"idMedico={idMedico}&novaProfissao={novaProfissao}";
             var request = $"{Url}/{action}?{parameters}";
             var response = await httpClient.PostAsync(request, new StringContent(""));
-            if(response.StatusCode == HttpStatusCode.BadRequest)
+            if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var messageRequestErro = JsonConvert.DeserializeObject<ExceptionJson>(await response.Content.ReadAsStringAsync());
                 throw new ArgumentException(messageRequestErro.Message);
-            }            
+            }
         }
 
+        /// <summary>
+        /// Método utilizado para atualizar a senha do usuário.
+        /// </summary>
+        /// <param name="idMedico">Indica o código que receberá a alteração.</param>
+        /// <param name="novaSenha">Indica a nova senha.</param>
+        /// <returns></returns>
         public async Task AtualizaSenha(int idMedico, string novaSenha)
         {
             HttpClient httpClient = new HttpClient();
@@ -52,5 +71,6 @@ namespace ProjetoSD.Mobile.DAO
                 throw new ArgumentException(messageRequestErro.Message);
             }
         }
+        #endregion
     }
 }

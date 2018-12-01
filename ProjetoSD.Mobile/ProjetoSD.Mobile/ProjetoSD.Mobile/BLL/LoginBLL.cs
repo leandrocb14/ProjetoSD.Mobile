@@ -23,6 +23,12 @@ namespace ProjetoSD.Mobile.BLL
         #endregion
 
         #region Métodos Públicos
+        /// <summary>
+        /// Método utilizado para verificar a existencia do usuário.
+        /// </summary>
+        /// <param name="email">Utilizado para identificar o email utilizado pelo profissional.</param>
+        /// <param name="senha">Utilizado para identificar a chave utilizado pelo <paramref name="email"/> do profissional.</param>
+        /// <returns></returns>
         public async Task<int> VerificaAutenticacao(string email, string senha)
         {
             this.ValidacaoBLL.VerificaSeParametroEhNuloOuVazio(email, "Email");

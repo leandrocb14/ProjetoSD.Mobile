@@ -9,14 +9,24 @@ using System.Threading.Tasks;
 
 namespace ProjetoSD.Mobile.DAO
 {
-    public class CadastrarUsuarioMedicoDAO
+    public class CadastrarUsuarioMedicoDAO : INavigationFeature
     {
         #region Propriedades
-        private static string Controller = "Usuario";
-        private string Url = string.Format($"{Host.Url}/{Controller}");
+        public string Controller { get { return "Usuario"; } }
+        public string Url { get { return string.Format($"{Host.Url}/{Controller}"); } }        
         #endregion
 
         #region Métodos Públicos
+        /// <summary>
+        /// Método utilizado para cadastrar um novo usuário.
+        /// </summary>
+        /// <param name="crm">Representa o código do profissional de saúde</param>
+        /// <param name="nome">Representa o nome do profissional.</param>
+        /// <param name="uF">Representa a unidade federativa do profissional.</param>
+        /// <param name="profissao">Representa a profissão do profissional.</param>
+        /// <param name="email">Represnta o email do profissional.</param>
+        /// <param name="senha">Representa a senha do profissional</param>
+        /// <returns></returns>
         public async Task CadastraUsuario(string crm, string nome, UF uF, string profissao, string email, string senha)
         {            
             HttpClient cliente = new HttpClient();

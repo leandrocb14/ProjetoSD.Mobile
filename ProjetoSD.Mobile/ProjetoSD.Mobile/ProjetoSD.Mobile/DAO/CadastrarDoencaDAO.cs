@@ -9,11 +9,22 @@ using System.Threading.Tasks;
 
 namespace ProjetoSD.Mobile.DAO
 {
-    public class CadastrarDoencaDAO
+    public class CadastrarDoencaDAO : INavigationFeature
     {
-        private static string Controller = "Doenca";
-        private string Url = string.Format($"{Host.Url}/{Controller}");
+        #region Propriedades
+        public string Controller { get { return "Doenca"; } }
+        public string Url { get { return string.Format($"{Host.Url}/{Controller}"); } }
+        #endregion
 
+        #region Métodos Publicos
+        /// <summary>
+        /// Método utilizado para cadastrar uma nova doença.
+        /// </summary>
+        /// <param name="idMedico">Representa o código de quem identificou.</param>
+        /// <param name="nomeDoenca">Representa o nome da doença.</param>
+        /// <param name="descricao">Representa o nome da descrição do <paramref name="nomeDoenca"/>.</param>
+        /// <param name="profilaxia">Representa as maneiras de previnir o <paramref name="nomeDoenca"/>.</param>
+        /// <returns></returns>
         public async Task Cadastrar(int idMedico, string nomeDoenca, string descricao, string profilaxia)
         {
             HttpClient httpClient = new HttpClient();
@@ -27,5 +38,6 @@ namespace ProjetoSD.Mobile.DAO
                 throw new ArgumentException(ErrorMessageRequest.Message);
             }
         }
+        #endregion
     }
 }

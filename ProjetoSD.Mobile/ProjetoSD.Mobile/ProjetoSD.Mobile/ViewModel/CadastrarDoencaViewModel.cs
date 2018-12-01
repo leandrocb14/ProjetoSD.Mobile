@@ -52,12 +52,12 @@ namespace ProjetoSD.Mobile.ViewModel
         public CadastrarDoencaViewModel(int idMedico)
         {
             this.IdMedico = idMedico;
-            this.CadastrarDoencaBLL = new CadastrarDoencaBLL();
+            this.CadastrarDoencaBLL = new CadastrarDoencaBLL(idMedico);
             this.CadastrarCommand = new Command(async () =>
             {
                 try
                 {
-                    await this.CadastrarDoencaBLL.Adiciona(IdMedico, oQueEh, Tratamento, Evite);
+                    await this.CadastrarDoencaBLL.Adiciona(oQueEh, Tratamento, Evite);
                     LimparCampoOQueEh();
                     LimparCampoTratamento();
                     LimparCampoEvite();
