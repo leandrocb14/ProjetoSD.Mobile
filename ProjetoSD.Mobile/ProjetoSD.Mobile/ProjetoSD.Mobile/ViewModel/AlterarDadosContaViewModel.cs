@@ -118,8 +118,21 @@ namespace ProjetoSD.Mobile.ViewModel
 
             Task task = Task.Factory.StartNew(() =>
             {
-                var medicoJson = AlterarDadosContaBLL.BuscaInformacoesUsuario();
-                ArmazenaInformacoes(medicoJson);
+
+                try
+                {
+                    PopupNavigation.Instance.PushAsync(new PopupLoadingView());
+                    var medicoJson = AlterarDadosContaBLL.BuscaInformacoesUsuario();
+                    ArmazenaInformacoes(medicoJson);
+                }
+                catch (Exception ex)
+                {
+                    MessagingCenterSendErro(ex.Message);
+                }
+                finally
+                {
+                    PopupNavigation.Instance.PopAsync();
+                }
             });
 
             this.AlterarCommand = new Command(async () =>
@@ -132,9 +145,10 @@ namespace ProjetoSD.Mobile.ViewModel
                     LimpaCampoCSenha();
                     MessagingCenter.Send<string>("Alteração realizada com sucesso!", "SucessoAlteracao");
                     await PopupNavigation.Instance.PopAsync();
-                }catch(CampoNullOrEmptyException ex)
+                }
+                catch (CampoNullOrEmptyException ex)
                 {
-                    MessagingCenterSendErro(ex.Message);                    
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch (ConfirmacaoSenhaSemReferenciaException ex)
                 {
@@ -146,7 +160,7 @@ namespace ProjetoSD.Mobile.ViewModel
                     LimpaCampoSenha();
                     MessagingCenterSendErro(ex.Message);
                 }
-                catch(ConfirmationPasswordDifferentException ex)
+                catch (ConfirmationPasswordDifferentException ex)
                 {
                     LimpaCampoSenha();
                     LimpaCampoCSenha();
@@ -157,7 +171,7 @@ namespace ProjetoSD.Mobile.ViewModel
                     MessagingCenterSendErro(ex.Message);
                 }
             });
-        }        
+        }
         #endregion
 
         #region Métodos Privados

@@ -6,6 +6,6 @@ namespace ProjetoSD.Mobile.Model
 {
     public abstract class Host
     {        
-        public static string Url = $"http://192.168.0.12/ProjetoSDAPI";
+        public static string Url = $"https://wikisickapi.azurewebsites.net";
     }
 }

@@ -47,7 +47,7 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
-                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView(), false);
                     int CodeUser = await LoginBLL.VerificaAutenticacao(email, senha);
                     MessagingCenter.Send<string>(Convert.ToString(CodeUser), "EntrarCommand");                    
                 }

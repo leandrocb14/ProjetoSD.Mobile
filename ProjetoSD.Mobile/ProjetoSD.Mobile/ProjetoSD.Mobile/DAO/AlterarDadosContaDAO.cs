@@ -28,7 +28,7 @@ namespace ProjetoSD.Mobile.DAO
             string action = "BuscaInformacoesUsuario";
             string parameters = $"idMedico={idMedico}";
             var request = $"{Url}/{action}?{parameters}";
-            var response = await httpClient.GetAsync(request);
+            var response = await httpClient.GetAsync(request);            
             var messageRequest = JsonConvert.DeserializeObject<MedicoJson>(await response.Content.ReadAsStringAsync());
             return messageRequest;
         }

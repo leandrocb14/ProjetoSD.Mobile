@@ -17,5 +17,10 @@ namespace ProjetoSD.Mobile.View
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override bool OnBackgroundClicked()
+        {
+            return false;
+        }
+    }
 }
