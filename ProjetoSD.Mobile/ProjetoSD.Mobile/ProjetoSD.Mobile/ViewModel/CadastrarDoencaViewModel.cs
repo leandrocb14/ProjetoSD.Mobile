@@ -1,5 +1,7 @@
 ﻿using ProjetoSD.Mobile.BLL;
 using ProjetoSD.Mobile.Exceptions;
+using ProjetoSD.Mobile.View;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +13,7 @@ namespace ProjetoSD.Mobile.ViewModel
     public class CadastrarDoencaViewModel : BaseViewModel
     {
 
+        #region Propriedades
         private CadastrarDoencaBLL CadastrarDoencaBLL;
         private int IdMedico;
 
@@ -48,7 +51,9 @@ namespace ProjetoSD.Mobile.ViewModel
         }
 
         public ICommand CadastrarCommand { get; set; }
+        #endregion
 
+        #region Construtor
         public CadastrarDoencaViewModel(int idMedico)
         {
             this.IdMedico = idMedico;
@@ -57,6 +62,7 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
                     await this.CadastrarDoencaBLL.Adiciona(oQueEh, Tratamento, Evite);
                     LimparCampoOQueEh();
                     LimparCampoTratamento();
@@ -65,11 +71,21 @@ namespace ProjetoSD.Mobile.ViewModel
                 }
                 catch (CampoNullOrEmptyException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessagingCenterSendErro(ex.Message);
+                }
+                finally
+                {
+                    await PopupNavigation.Instance.PopAsync();
                 }
             });
-        }
+        }        
+        #endregion
 
+        #region Métodos Privados
         private void LimparCampoOQueEh()
         {
             this.OQueEh = "";
@@ -82,5 +98,10 @@ namespace ProjetoSD.Mobile.ViewModel
         {
             this.Evite = "";
         }
+        private void MessagingCenterSendErro(string messageErro)
+        {
+            MessagingCenter.Send<string>(messageErro, "Exception");
+        }
+        #endregion
     }
 }

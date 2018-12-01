@@ -1,6 +1,8 @@
 ﻿using ProjetoSD.Mobile.BLL;
 using ProjetoSD.Mobile.Exceptions;
 using ProjetoSD.Mobile.Model;
+using ProjetoSD.Mobile.View;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -113,21 +115,26 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
                     var response = await this.CadastrarUsuarioMedicoBLL.ConsultaUFCRM(UF, crm);
                     PreencheDadosRetornadosDaConsultaUFCRM(response);
                 }
                 catch (CampoNullOrEmptyException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch (CRMNotFoundException ex)
                 {
                     LimparCampoCRM();
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch(Exception ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
+                }
+                finally
+                {
+                    await PopupNavigation.Instance.PopAsync();
                 }
                 
             });
@@ -135,24 +142,29 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
                     await this.CadastrarUsuarioMedicoBLL.CadastraUsuario(crm, nome, UF, profissao, email, senha, confirmarSenha);
                     MessagingCenter.Send<string>("", "EfetuarCadastroContaCommand");
                 }
                 catch (CampoNullOrEmptyException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch(ConfirmationPasswordDifferentException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch(ArgumentException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch(Exception ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
+                }
+                finally
+                {
+                    await PopupNavigation.Instance.PopAsync();
                 }
 
             });
@@ -161,6 +173,8 @@ namespace ProjetoSD.Mobile.ViewModel
                 MessagingCenter.Send<string>("", "GoToLogin");
             });
         }
+
+        
         #endregion
 
         #region Métodos Privados
@@ -172,6 +186,10 @@ namespace ProjetoSD.Mobile.ViewModel
         {
             Nome = consultaCRMJson.item[0].nome;
             Profissao = consultaCRMJson.item[0].profissao;
+        }
+        private void MessagingCenterSendErro(string messageErro)
+        {
+            MessagingCenter.Send<string>(messageErro, "Exception");
         }
         #endregion
 

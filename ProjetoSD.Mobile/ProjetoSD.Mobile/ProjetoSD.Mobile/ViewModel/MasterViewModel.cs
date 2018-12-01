@@ -8,11 +8,14 @@ namespace ProjetoSD.Mobile.ViewModel
 {
     public class MasterViewModel
     {
+        #region Propriedades
         public ICommand CadastrarDoencaCommand { get; set; }
         public ICommand AlterarDadosContaCommand { get; set; }
         public ICommand SobreCommand { get; set; }
         public ICommand SairCommand { get; set; }
+        #endregion
 
+        #region Construtor
         public MasterViewModel()
         {
             this.CadastrarDoencaCommand = new Command(() =>
@@ -32,5 +35,6 @@ namespace ProjetoSD.Mobile.ViewModel
                 MessagingCenter.Send<string>("", "GoToLogin");
             });
         }
+        #endregion
     }
 }

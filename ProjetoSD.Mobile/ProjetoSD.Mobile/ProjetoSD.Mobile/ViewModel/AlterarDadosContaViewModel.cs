@@ -1,6 +1,8 @@
 ﻿using ProjetoSD.Mobile.BLL;
 using ProjetoSD.Mobile.Exceptions;
 using ProjetoSD.Mobile.Model;
+using ProjetoSD.Mobile.View;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -101,6 +103,13 @@ namespace ProjetoSD.Mobile.ViewModel
         public ICommand AlterarCommand { get; set; }
         #endregion
 
+        #region Construtores
+        public AlterarDadosContaViewModel()
+        {
+
+        }
+        #endregion
+
         #region Métodos Publico
         public AlterarDadosContaViewModel(int idMedico)
         {
@@ -117,37 +126,38 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
                     await this.AlterarDadosContaBLL.AlterarDadosUsuario(Profissao, novaSenha, cNovaSenha);
                     LimpaCampoSenha();
                     LimpaCampoCSenha();
                     MessagingCenter.Send<string>("Alteração realizada com sucesso!", "SucessoAlteracao");
+                    await PopupNavigation.Instance.PopAsync();
                 }catch(CampoNullOrEmptyException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);                    
                 }
                 catch (ConfirmacaoSenhaSemReferenciaException ex)
                 {
                     LimpaCampoCSenha();
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch (SenhaSemConfirmacaoException ex)
                 {
                     LimpaCampoSenha();
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
                 }
                 catch(ConfirmationPasswordDifferentException ex)
                 {
                     LimpaCampoSenha();
                     LimpaCampoCSenha();
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessagingCenterSendErro(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessagingCenterSendErro(ex.Message);
                 }
             });
-        }
-
-        public AlterarDadosContaViewModel()
-        {
-
-        }
+        }        
         #endregion
 
         #region Métodos Privados
@@ -168,6 +178,11 @@ namespace ProjetoSD.Mobile.ViewModel
         private void LimpaCampoCSenha()
         {
             this.CNovaSenha = "";
+        }
+
+        private void MessagingCenterSendErro(string messageErro)
+        {
+            MessagingCenter.Send<string>(messageErro, "Exception");
         }
         #endregion
     }

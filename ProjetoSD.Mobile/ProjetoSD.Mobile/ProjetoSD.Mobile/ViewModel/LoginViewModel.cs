@@ -1,5 +1,7 @@
 ﻿using ProjetoSD.Mobile.BLL;
 using ProjetoSD.Mobile.Exceptions;
+using ProjetoSD.Mobile.View;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -45,23 +47,32 @@ namespace ProjetoSD.Mobile.ViewModel
             {
                 try
                 {
+                    await PopupNavigation.Instance.PushAsync(new PopupLoadingView());
                     int CodeUser = await LoginBLL.VerificaAutenticacao(email, senha);
                     MessagingCenter.Send<string>(Convert.ToString(CodeUser), "EntrarCommand");                    
                 }
                 catch (CampoNullOrEmptyException ex)
                 {
-                    MessagingCenter.Send<string>(ex.Message, "Exception");
+                    MessasingCenterSendError(ex.Message);
                 }
-                catch (EmailInvalidoException ex2)
+                catch (EmailInvalidoException ex)
                 {
                     LimparCampoEmail();
                     LimparCampoSenha();
-                    MessagingCenter.Send<string>(ex2.Message, "Exception");
+                    MessasingCenterSendError(ex.Message);
                 }
-                catch (UsuarioNotFoundException ex3)
+                catch (UsuarioNotFoundException ex)
                 {
                     LimparCampoSenha();
-                    MessagingCenter.Send<string>(ex3.Message, "Exception");
+                    MessasingCenterSendError(ex.Message);
+                }
+                catch(Exception ex)
+                {
+                    MessasingCenterSendError(ex.Message);
+                }
+                finally
+                {
+                    await PopupNavigation.Instance.PopAsync();
                 }
             });
             this.CadastrarContaCommand = new Command(() =>
@@ -79,6 +90,10 @@ namespace ProjetoSD.Mobile.ViewModel
         private void LimparCampoSenha()
         {
             Senha = "";
+        }
+        private void MessasingCenterSendError(string messageErro)
+        {
+            MessagingCenter.Send<string>(messageErro, "Exception");
         }
         #endregion
     }
